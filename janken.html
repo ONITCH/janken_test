@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/janken.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  <title>じゃんけん</title>
+</head>
+
+<body>
+  <header>
+    <h1>真・ジーズ転生VIII</h1>
+  </header>
+
+  <main>
+    <div class="upper_part">
+      <div class="container">
+        <div class="hands">
+          <div class="left-box">
+            <h2>ＨＡＬＦ<br>　　ＭＯＯＮ<br><br>Ｂ１<br>　　ＮＯＲＴＨ<br><br>￥５６０００</h2>
+          </div>
+          <h id="message-1">🖐🏻</h>
+          <div class="fight">
+            <a href="/janken.html" class="original-button" onclick="StartPlay(); GameStart()" value="スタート">ＪＡＮＫＥＮ</a>
+            <a href="" class="original-button">ＥＳＣＡＰＥ</a>
+            <a href="" class="original-button">ＴＡＬＫ</a>
+            <a href="" class="original-button">ＡＵＴＯ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="middle_part">
+      <div class="command">
+        <div class="command_box">
+          <p>プレイヤーは何を出しますか？</p>
+          <ul class="playerHands">
+            <li id="gu_btn" class="gu_btn">▶︎グー</li>
+            <li id="cho_btn" class="cho_btn">▶︎チョキ</li>
+            <li id="par_btn" class="pa_btn">▶︎パー</li>
+            <p id="com_hand"></p>
+            <p id="result"></p>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="lower_part">
+      <div class="status">
+        <div>
+          <ul class="status_each1">
+            <li class="status_content">おにづか<br>　　　　　　H　　190<br>　　　　　　M　　200</li>
+            <li class="status_content">おにづか<br>　　　　　　H　　190<br>　　　　　　M　　200</li>
+            <li class="status_content">おにづか<br>　　　　　　H　　190<br>　　　　　　M　　200</li>
+          </ul>
+          <ul class="status_each2">
+            <li class="status_content">おにづか<br>　　　　　　H　　190<br>　　　　　　M　　200</li>
+            <li class="status_content">EMPTY</li>
+            <li class="status_content">EMPTY</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+
+    <!--      <ul>
+    <li id="gu_btn">グー</li>
+      <li id="cho_btn">チョキ</li>
+      <li id="par_btn">パー</li>
+    </ul>
+    <div id="com_hand">コンピュータの出した手は？</div>
+    <div id="result">結果は？</div>
+  </main> -->
+
+    <footer>フッター</footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      //ここに処理を追加
+      // var hand = new Array("🖐🏻", "✊🏻", "✌🏻");
+      // var msg = new Array("ボタンを押してね", "FiverPlay", "ZukoPlay", "AikoPlay");
+      $("#gu_btn").on("click", function () {
+        const min = 0;
+        const max = 2;
+        const randomNumber = Math.floor(Math.random() * (max - min + 1));
+        console.log(randomNumber);
+
+        if (randomNumber === 0) {
+          $("#com_hand").text("お互いグーだ！");
+          $("#result").text("敵は何もしてこない");
+        } else if (randomNumber === 1) {
+          $("#com_hand").text("グーパン！相手はチョキを出した");
+          $("#result").text("敵に36のダメージ！敵は弱っている");
+        } else {
+          $("#com_hand").text("こちらはグーで相手はパーだ");
+          $("#result").text("プレイヤーは20のダメージを受けた");
+        }
+      });
+
+      $("#cho_btn").on("click", function () {
+        const min = 0;
+        const max = 2;
+        const randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+        console.log(randomNumber);
+
+        if (randomNumber === 0) {
+          $("#com_hand").text("相手ぐー");
+          $("#result").text("あなたのまけ");
+        } else if (randomNumber === 1) {
+          $("#com_hand").text("相手ちょき");
+          $("#result").text("あいこ");
+        } else {
+          $("#com_hand").text("相手ぱー");
+          $("#result").text("あなたのかち");
+        }
+      });
+
+      $("#par_btn").on("click", function () {
+        const min = 0;
+        const max = 2;
+        const randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+        console.log(randomNumber);
+
+        if (randomNumber === 0) {
+          $("#com_hand").text("相手ぐー");
+          $("#result").text("あなたのかち");
+        } else if (randomNumber === 1) {
+          $("#com_hand").text("相手ちょき");
+          $("#result").text("あなたのまけ");
+        } else {
+          $("#com_hand").text("相手ぱー");
+          $("#result").text("あいこ");
+        }
+      });
+
+      // 手のアニメーション
+      const message1 = document.getElementById('message-1');
+
+      const messages = [
+        '✊🏻',
+        '✌🏻',
+        '🖐🏻',
+      ];
+
+      let i = 0;
+
+      function showMessage_1() {
+        if (i == 3) {
+          i = 0;
+        }
+        message1.textContent = messages[i];
+        i++;
+      }
+
+      setInterval(showMessage_1, 300);
+
+      // ボタンが揺れる
+      $(function () {
+        $("#gu_btn").on("click", function () {
+          $(this).css("animation", "shake 0.3s");
+
+          var copied = $(this).clone(true);
+          $(this).before(copied);
+          $("." + $(this).attr("class") + ":last").remove();
+        });
+      });
+      $(function () {
+        $("#cho_btn").on("click", function () {
+          $(this).css("animation", "shake 0.3s");
+
+          var copied = $(this).clone(true);
+          $(this).before(copied);
+          $("." + $(this).attr("class") + ":last").remove();
+        });
+      });
+      $(function () {
+        $("#par_btn").on("click", function () {
+          $(this).css("animation", "shake 0.3s");
+
+          var copied = $(this).clone(true);
+          $(this).before(copied);
+          $("." + $(this).attr("class") + ":last").remove();
+        });
+      });
+
+      function GameStart() {
+        //ボタンの有効化
+        document.getElementById("gu").disabled = false;
+        document.getElementById("choki").disabled = false;
+        document.getElementById("pa").disabled = false;
+        //リセットボタンを使えなくする
+        // document.getElementById["start"].disabled = true;
+        GetCountHand();
+      }
+
+      function GetCountHand() {
+        //手を順番に表示
+        document.getElementById("ComHand").innerHTML = "<img src='" + hand[count] + "'>";
+        count++;
+        if (count > 2) count = 0;
+        timer = setTimeout("GetCountHand()", 500);
+      }
+    </script>
+
+</body>
+
+</html>
