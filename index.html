@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/janken.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  <title>じゃんけん</title>
+</head>
+
+<body>
+  <header>
+    <h1>真・ジーズ転生VIII</h1>
+  </header>
+
+  <main>
+    <div class="upper_part">
+      <div class="container">
+        <div class="hands">
+          <div class="left-box">
+            <h2>ＨＡＬＦ<br>　　ＭＯＯＮ<br><br>Ｂ１<br>　　ＮＯＲＴＨ<br><br>￥５６０００</h2>
+          </div>
+          <h id="message-1">🖐🏻</h>
+          <div class="fight">
+            <button id="janken" class="original-button">ＳＥＬＥＣＴ👤</button>
+            <button onclick="window.location.reload();" id="escape" class="original-button">ＥＳＣＡＰＥ</button>
+            <button id="talk" class="original-button">ＴＡＬＫ</button>
+            <button id="auto" class="original-button">ＡＵＴＯ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="middle_part">
+      <div class="command">
+        <form class="command_box">
+          <p id="player_select">ジーズアカデミーがじゃんけんを仕掛けてきた！<br>▶︎プレイヤーをセレクトしてください
+          </p>
+          <!-- <input type="checkbox"> -->
+          <ul style="display: none;" class="playerHands">
+            <li id="gu_btn" class="gu_btn">▶︎グー</li>
+            <li id="cho_btn" class="cho_btn">▶︎チョキ</li>
+            <li id="par_btn" class="pa_btn">▶︎パー</li>
+            <p id="com_hand"></p>
+            <p id="result"></p>
+          </ul>
+        </form>
+      </div>
+    </div>
+
+    <div class="lower_part">
+      <div class="status">
+        <div>
+          <ul class="status_each1">
+            <li class="status_content">りょうへい<br>　　　　　　H　　190<br>　　　　　　M　　200</li>
+            <li class="status_content">おにづか<br>　　　　　　H　　190<br>　　　　　　M　　200</li>
+            <li class="status_content">おにづか<br>　　　　　　H　　190<br>　　　　　　M　　200</li>
+          </ul>
+          <ul class="status_each2">
+            <li class="status_content">おにづか<br>　　　　　　H　　190<br>　　　　　　M　　200</li>
+            <li class="status_content">EMPTY</li>
+            <li class="status_content">EMPTY</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+    <footer>フッター</footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      //ここに処理を追加
+      //表示・非表示　ぐーちょきぱ
+      $(function () {
+        $('.original-button').click(function () {
+          $('.playerHands').show();
+        });
+      });
+
+      // 手のアニメーション ////////
+      const message1 = document.getElementById('message-1');
+
+      const messages = [
+        '✊🏻',
+        '✌🏻',
+        '🖐🏻',
+      ];
+
+      let i = 0;
+
+      function showMessage_1() {
+        if (i > 2) {
+          i = 0;
+        }
+        message1.textContent = messages[i];
+        i++;
+      }
+      let setIntervalID = setInterval(showMessage_1, 300);
+
+      // 手のアニメーションここまで ////////
+
+
+
+      // プレイヤーセレクトランダム
+      $("#janken").on("click", function () {
+        const min = 0;
+        const max = 9;
+        const randomNumber = Math.floor(Math.random() * (max - min + 1));
+        console.log(randomNumber);
+
+        if (randomNumber === 0) {
+          $("#player_select").text("あっちゃんは美しい声で相手を魅了する！何を出しますか？");
+        } else if (randomNumber === 1) {
+          $("#player_select").text("うえかりちゃんが寝てないのにまだ元気だ！何を出しますか？");
+        } else if (randomNumber === 2) {
+          $("#player_select").text("えごさんが戦闘ロボットに乗り込んだ！何を出しますか？");
+        } else if (randomNumber === 3) {
+          $("#player_select").text("おにっちは無職だ！何を出しますか？");
+        } else if (randomNumber === 4) {
+          $("#player_select").text("くぼっちがＭＴＧカードで味方を召喚！何を出しますか？");
+        } else if (randomNumber === 5) {
+          $("#player_select").text("あやちゃんは愛するうさぎと一心同体だ！何を出しますか？");
+        } else if (randomNumber === 6) {
+          $("#player_select").text("すーさんのお酒の勢いが全然止まらない！何を出しますか？");
+        } else if (randomNumber === 7) {
+          $("#player_select").text("しょうくんが壱岐からイルカで遠隔攻撃！何を出しますか？");
+        } else if (randomNumber === 8) {
+          $("#player_select").text("ひーくんが釣竿１００本で武装した！何を出しますか？");
+        } else if (randomNumber === 9) {
+          $("#player_select").text("てつくんが危険なアクセサリーを全身装備！何を出しますか？");
+        }
+
+      })
+
+
+
+
+      //COM 0=✊🏻 1=✌🏻 2=🖐🏻
+
+      $("#gu_btn").on("click", function () {
+        const min = 0;
+        const max = 2;
+        const randomNumber = Math.floor(Math.random() * (max - min + 1));
+        console.log(randomNumber);
+
+        if (randomNumber === 0) {
+          $("#com_hand").text("✊🏻 VS ✊🏻 ...あいこ！");
+          $("#result").text("課題はまだ完成していないようだ");
+        } else if (randomNumber === 1) {
+          $("#com_hand").text("✊🏻 VS ✌🏻 ...勝った！");
+          $("#result").text("課題の発表でみんなが褒めてくれた");
+        } else {
+          $("#com_hand").text("✊🏻 VS 🖐🏻 ...負けた");
+          $("#result").text("睡魔に勝てず課題が完成しなかった");
+        }
+      });
+
+      $("#cho_btn").on("click", function () {
+        const min = 0;
+        const max = 16;
+        const randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+        console.log(randomNumber);
+
+        if (randomNumber >= 0 && randomNumber <= 4) {
+          $("#com_hand").text("✌🏻 VS ✊🏻 ...負けてしまった");
+          $("#result").text("たろ先生の授業のスピードが増した");
+        } else if (randomNumber >= 5 && randomNumber <= 9) {
+          $("#com_hand").text("✌🏻 VS ✌🏻 ...あいこだった");
+          $("#result").text("えのっきーさんが生暖かい目でこちらを見ている");
+        } else if (randomNumber >= 10 && randomNumber <= 14) {
+          $("#com_hand").text("✌🏻 VS 🖐🏻 ...勝ちだ！！");
+          $("#result").text("ごってぃさんがおやつを持ってきた！HP全快した");
+        } else if (randomNumber === 15) {
+          $("#com_hand").text("✌🏻 VS ✊🏻 ...相手からの大ダメージ！！！");
+          $("#result").text("■■■GAME OVER■■■ 入学式からやり直し");
+        } else {
+          $("#com_hand").text("✌🏻 VS 🖐🏻 ...自分の攻撃がクリティカルヒット！！！");
+          $("#result").text("■■■YOU WIN■■■半年後晴れて卒業できた！")
+        }
+      });
+
+      $("#par_btn").on("click", function () {
+        const min = 0;
+        const max = 2;
+        const randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+        console.log(randomNumber);
+
+        if (randomNumber === 0) {
+          $("#com_hand").text("🖐🏻 VS ✊🏻 ...勝ち");
+          $("#result").text("Ｊａｖａｓｃｒｉｐｔが理解できた！");
+        } else if (randomNumber === 1) {
+          $("#com_hand").text("🖐🏻 VS ✌🏻 ...負け");
+          $("#result").text("コードの間違いが永遠に見つからない");
+        } else {
+          $("#com_hand").text("🖐🏻 VS 🖐🏻 ...あいこ");
+          $("#result").text("いいアイデアがもう少しで出そうだ");
+        }
+      });
+
+      // //テキストの内容を変える
+      // $('#gu_btn').on('click', function () {
+      //   if ($('message-1').text('😃'))
+      // });
+
+
+      // じゃんけんを止めたかった
+      // btn.addEventListener('click', () => {
+      //   if (btnFlag == 0) {
+      //     btnFlag = 1;
+      //     btn.textContent = 'メッセージを変更';
+      //     btn.style.backgroundColor = 'blue';
+      //     clearInterval(setIntervalId);
+      //   } else {
+      //     btnFlag = 0;
+      //     btn.textContent = 'メッセージ変更を停止';
+      //     btn.style.backgroundColor = 'red';
+      //     setIntervalId = setInterval(showMessage_1, 300);
+      //   }
+      // });
+
+
+
+
+      // ボタンが揺れる ///////////
+      $(function () {
+        $("#gu_btn").on("click", function () {
+          $(this).css("animation", "shake 0.3s");
+
+          var copied = $(this).clone(true);
+          $(this).before(copied);
+          $("." + $(this).attr("class") + ":last").remove();
+        });
+      });
+
+      $(function () {
+        $("#cho_btn").on("click", function () {
+          $(this).css("animation", "shake 0.3s");
+
+          var copied = $(this).clone(true);
+          $(this).before(copied);
+          $("." + $(this).attr("class") + ":last").remove();
+        });
+      });
+
+      $(function () {
+        $("#par_btn").on("click", function () {
+          $(this).css("animation", "shake 0.3s");
+
+          var copied = $(this).clone(true);
+          $(this).before(copied);
+          $("." + $(this).attr("class") + ":last").remove();
+        });
+      });
+      // ボタンが揺れるここまで////////
+
+
+    </script>
+
+</body>
+
+</html>
